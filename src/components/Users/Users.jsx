@@ -1,19 +1,26 @@
-import styles from './users.module.css';
-import axios from "axios";
-import userPhoto from '../../assets/images/user-image.png';
+import React from "react";
+import styles from "./users.module.css";
+import userPhoto from "../../assets/images/user-image.png";
 
-const Users = (props) => {
+let Users = (props) => {
+	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-	if (props.users.length === 0) {
-		axios
-			.get('https://social-network.samuraijs.com/api/1.0/users')
-			.then(response => {
-				props.setUsers(response.data.items);
-			})
+	let pages = [];
+
+	for (let i = 1; i <= 20; i++) {
+		pages.push(i);
 	}
-
 	return (
 		<div>
+			<div>
+				{pages.map(p => {
+					return <span className={props.currentPage === p && styles.selectedPage}
+								 onClick={() => {
+									 props.onPageChanged(p)
+								 }}>{p} </span>;
+				})}
+				<span>Всего страниц: {pagesCount}</span>
+			</div>
 			{props.users.map(u => {
 				return (
 					<div key={u.id}>
