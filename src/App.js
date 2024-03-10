@@ -2,9 +2,10 @@ import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Users from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import Login from "./components/Login/Login";
 
 const App = (props) => {
 	return (
@@ -29,7 +30,13 @@ const App = (props) => {
 						<Route
 							path='/users/*'
 							element={
-								<Users />
+								<UsersContainer />
+							}
+						/>
+						<Route
+							path='/login/*'
+							element={
+								<Login />
 							}
 						/>
 					</Routes>
